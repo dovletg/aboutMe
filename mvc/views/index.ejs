@@ -236,6 +236,11 @@
                         </div>
                     </div>
                 </div>
+
+                <h1 style="height: 200px; width: 100%;"><%= posts.length %></h1>
+
+                <%- include("indexPagePosts/row.ejs", {posts: posts.splice(0, 3), posts_meta: ["hpr", "hpr", "vp"]})%>
+
             </div>
         </div>
     </section>
