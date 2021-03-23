@@ -1,12 +1,28 @@
 
 
 const data = require("../../data");
-
 const postData = data.postData;
+const uniqueTags = data.uniqueTags;
+const categoryData = data.categoryData;
+
+const recentPostsAmount = 6;
 
 
-const getHomePage = function(req, res) {
-  res.render("index", {title: "About Me", posts: postData});
+const getHomePage = function(req, res, next) {
+  console.log("======================");
+    console.log("======================");
+    console.log(postData.length);
+    console.log("======================");
+    console.log("======================");
+
+    const templateData = {
+        title: 'Just Me - My Awesome Blog',
+        posts: postData,
+        active: 'index',
+        categoryData: data.categoryData
+    }
+
+    res.render('index', templateData);
 }
 
 const getBlogPost = function({params}, res, next) {
@@ -54,11 +70,26 @@ const getContact = function(req, res, next) {
     res.render('contact', templateData);
 }
 
+const getFilteredList = function({query}, res, next) {
+    let filteredPosts = postData.filter((val) => {
+        return val.category == query.category || val.tags.includes(query.tag);
+    });
+
+    const templateData = {
+        title: "About Me - Filtered",
+        active: query.category,
+        posts: filteredPosts,
+        categoryData: data.categoryData
+    }
+    res.render('filter', templateData);
+}
+
 module.exports = {
   getHomePage,
   getBlogPost,
   get404,
   redirect404,
   getAbout,
-  getContact
+  getContact,
+  getFilteredList
 }

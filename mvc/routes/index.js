@@ -10,6 +10,8 @@ router.get('/posts/:postid', indexCtrl.getBlogPost);
 router.get('/about', indexCtrl.getAbout);
 router.get('/contact', indexCtrl.getContact);
 
+router.get('/filter', indexCtrl.getFilteredList);
+
 router.get('/404', indexCtrl.get404);
 router.get('*', indexCtrl.redirect404);
 
